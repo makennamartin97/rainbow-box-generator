@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Enter from './Components/Enter';
+import Boxes from './Components/Boxes';
 
 function App() {
+  const [boxes, setboxes] = useState([]);
+  
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="jumbotron bg-primary text-white text-center">Rainbow Box Generator</div>
+      <div className="row">
+        <div className="col-sm-4">
+          <Enter handleSubmit={setboxes}/>
+          <div className="text-center mt-3">
+            <button className="btn btn-danger" onClick={() => setboxes([])}>Clear</button>
+          </div>
+        </div>
+        <div className="col-sm-8 d-flex flex-wrap l">
+          {boxes.map((box, i) => {
+            return(
+            <Boxes key={i} color={box.color}>{i}</Boxes>
+            );
+          }
+        )}
+        </div>
+      </div>
     </div>
   );
 }
